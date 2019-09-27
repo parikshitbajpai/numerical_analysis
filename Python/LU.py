@@ -19,4 +19,3 @@ def LU(A):
             for k in range(j,n+1):
                 U[i-1,k-1] = U[i-1,k-1] - L[i-1,j-1] * U[j-1,k-1]
     return L,U,ok
-

@@ -66,16 +66,11 @@ for k in range(0,ntrials):
     accuracy[k,2] = condition
 
 ## The following commands plot the relevant graphs
-n = np.arange(100)
-y_factorial = [math.factorial(nn) for nn in n]
+n = np.arange(100)                                          # Theoretical complexity of cofactor method
+y_factorial = [math.factorial(nn) for nn in n]              
 
-
-x_power3 = np.array(range(16))
+x_power3 = np.array(range(16))                              # Theoretical complexity of LU decomposition
 y_power3 = x_power3**3 / 10000
-#plt.loglog(wtime_lu[:,0],wtime_lu[:,1],y_factorial,'-',y_power3,'-')
-#plt.show()
-
-
 
 plt.loglog(wtime_cofactor[:,0],wtime_cofactor[:,1],'-*',wtime_lu[:,0],wtime_lu[:,1],'-*',y_factorial,'--',y_power3,'--')
 plt.title('Time as a function of size of the Matrix (n x n)')
@@ -85,10 +80,6 @@ plt.xlim([0,16])
 plt.ylim([0,1000000000000])
 plt.legend(('Computation: Cofactor','Computation: LUP','Order of Complexity: n!','Order of Complexity: n^3'), loc='lower left')
 plt.show()
-
-
-
-
 
 plt.loglog(accuracy[:,0],accuracy[:,1],'-r')
 plt.loglog(accuracy[:,0],accuracy[:,2],'-k')

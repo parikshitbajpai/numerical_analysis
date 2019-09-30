@@ -1,0 +1,70 @@
+\documentclass[11pt, oneside]{article}
+\usepackage{geometry}
+\geometry{letterpaper, margin=1in,top=0.75in}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\title{MCSC 6020G - Numerical Analysis \\
+        \Large Assignment 1}
+\author{Parikshit Bajpai}
+\date{}
+
+\newtheorem*{remark}{To prove}
+
+\begin{document}
+\maketitle
+
+\section*{Question 1}
+\subsection*{(a) Skew-symmetric matrix}
+
+  A square matrix $A$ is called skew-symmetric if $A^T = -A \;\; \text{i.e.} \;\; a_{ij}=-a{ji}$. A general example of such a matrix is:
+  \begin{equation*}
+      A=
+      \begin{bmatrix}
+        0              & \lambda_{11}  & \dots   & \lambda_{1n} \\
+        -\lambda_{11}  & 0             & \dots   & \lambda_{2n} \\
+        \vdots         & \vdots        & \ddots  & \vdots \\
+        -\lambda_{1n}  & -\lambda_{2n} & \dots   & 0
+      \end{bmatrix}
+  \end{equation*}
+  where, $\lambda_{ij} \in \mathbb{R}$.
+
+  A specific example of a skew-symmetric matrix is as follows:
+  \begin{equation*}
+    A=
+    \begin{bmatrix}
+      0              & \pi         & \dots   & \sqrt{2} \\
+      -\pi           & 0           & \dots   & e \\
+      \vdots         & \vdots      & \ddots  & \vdots \\
+      -\sqrt{2}      & -e          & \dots   & 0
+    \end{bmatrix}
+  \end{equation*}
+
+\subsection*{(b) Orthogonality}
+
+\begin{remark}
+If $B$ is a skew-symmetric matrix, then $A = (\mathbb{I}+B)(\mathbb{I}-B)^{-1}$ is orthogonal, where $\mathbb{I}$ is an identity matrix.
+\end{remark}
+\begin{proof}
+  For a matrix $A$ to be orthogonal, $A^T A = 1$, i.e., $A^T = A^{-1}$. For a skew-symmetric matrix $B$, we can define $ A = (\mathbb{I}+B)(\mathbb{I}-B)^{-1}$. Then,
+  \begin{align*}
+    A^T   &= \left(\left(\mathbb{I}+B\right)\left(\mathbb{I}-B\right)^{-1}\right)^T \\
+          &= \left(\left(\mathbb{I}-B\right)^{-1}\right)^T\left(\mathbb{I}+B\right)^T     && \left(\because (XY)^T = X^T Y^T\right)\\
+          &= \left(\left(\mathbb{I}-B\right)^T\right)^{-1}\left(\mathbb{I}+B\right)^T     && \left(\because (X^{-1})^T = (X^T)^{-1}\right)\\
+          &= \left(\mathbb{I}^T-B^T\right)^{-1}\left(\mathbb{I}^T+B^T\right)              && \left(\text{Distributivity}\right) \\
+          &= \left(\mathbb{I} + B\right)^{-1}\left(\mathbb{I}-B\right)                             && \left(\because B^T = - B\right)\\
+          &= \left(\mathbb{I}-B\right)\left(\mathbb{I}+B\right)^{-1}                                        && \left(\text{Commutativity\footnotemark}\right)\\
+          &= A^{-1}                                                 && \qedhere
+  \end{align*}
+\end{proof}
+\footnotetext{$(I+B)$ and $(I-B)$ are simultaneously diagonalisable matrices and, in such cases, matrix multiplication is commutative.}
+
+\section*{Question 2}
+
+
+
+\end{document}

@@ -14,12 +14,12 @@ from Determinant_LUP import determinant_LUP
 from Cofactor import comp_minor
 from Cofactor import determinant_cofactor
 
-ntrials = 7                                         # nr. of trials
-wtime_lu=np.zeros((ntrials,2))                      # array to store wall times
-wtime_cofactor=np.zeros((ntrials,2))
-accuracy = np.zeros((ntrials,3))                    # array to store accuracy measures
-error_rel = np.zeros((ntrials,3))                   # array to store error measures
-n=2
+ntrials = 6                                         # Number of trials
+wtime = np.zeros((ntrials,3))                       # Array to store wall times
+error_rel = np.zeros((ntrials,3))                   # Array to store relative errors
+error_absolute = np.zeros((ntrials,2))              # Array to store difference in errors
+n=2                                                 # Initial matrix size
+
 for k in range(0,ntrials):
     A = np.random.rand(n,n)
 
@@ -34,52 +34,59 @@ for k in range(0,ntrials):
     det_cofactor = determinant_cofactor(A)
     elapsed_cofactor = time.time()-start_cofactor   # Elapsed time using LUP
 
+    ## Difference between determinant computed from LU decomposition and Cofactor methods.
+    error_absolute[k,0] = n
+    error_absolute[k,1] = abs(det_lu - det_cofactor)
+
     ## The following commands use numpy to compute determinant of A and is assumed to be the "correct" value of determinant.
     det_np = np.linalg.det(A)
 
-    ## The following parts are used for analysis of results.
-    check = np.linalg.norm(np.matmul(L,U)-np.matmul(P,A))
-    condition = np.linalg.cond(A,2)                         # Condition number of matrix A
+    ## The relative errors are computed with respect to determinant using numpy which is assumed to be the 'true' value.
     error_rel_lu = abs(det_lu-det_np)/abs(det_np)           # Rel Error using LUP
     error_rel_cof = abs(det_cofactor-det_np)/abs(det_np)    # Rel Error using cofactor
 
-    print('n = %d, error = %e, K(A) = %e, t_lu = %e , t_cofactor = %e' % (n,check,condition,elapsed_lu,elapsed_cofactor))
-    #print('n = %d, error = %e, K(A) = %e, t_lu = %e'  % (n,check,condition,elapsed_lu))
-    #print('n = %d, K(A) = %e, t_cofactor = %e' % (n,condition,elapsed_cofactor))
+    print('Size = %d, Time_LU = %e , Time_Cofactor = %e' % (n,elapsed_lu,elapsed_cofactor))
+
+    ## The following parts are used to save the results for time and error.
+    wtime[k,0] = n                                          # Wall times
+    wtime[k,1] = elapsed_lu
+    wtime[k,2] = elapsed_cofactor
+
+    ## The relative errors are computed with respect to determinant using numpy which is assumed to be the 'true' value.
+    error_rel[k,0] = n                                      # Relative errors
+    error_rel[k,1] = error_rel_lu                           # LU factorization
+    error_rel[k,2] = error_rel_cof                          # Cofactor matrix
 
     ## Increase matrix size for subsequent trial.
-    n += 2
+    n += 2                                                  # Using n += 2 since cofactor method takes very long for n >= 14
 
-    ## The following parts are used to save the results for time and error
-    wtime_lu[k,0] = n                                       # Wall time for LUP
-    wtime_lu[k,1] = elapsed_lu
-
-    wtime_cofactor[k,0] = n                                 # Wall time for cofactor
-    wtime_cofactor[k,1] = elapsed_cofactor
-
-    error_rel[k,0] = n                                      # Relative errors
-    error_rel[k,1] = error_rel_lu
-    error_rel[k,1] = error_rel_cof
-
-    accuracy[k,0] = n                                       # Accuracy
-    accuracy[k,1] = check
-    accuracy[k,2] = condition
+## Arrays to plot the orders of complexity
+x = np.arange(100)                                          # Array of natural numbers to plot complexity
+y_cofactor = [math.factorial(i) for i in x]                 # Complexity of Cofactor method
+y_LU = [math.pow(i,3) for i in x]                           # Complexity of LU decomposition
 
 ## The following commands plot the relevant graphs
-n = np.arange(100)                                          # Theoretical complexity of cofactor method
-y_factorial = [math.factorial(nn) for nn in n]              
-
-x_power3 = np.array(range(16))                              # Theoretical complexity of LU decomposition
-y_power3 = x_power3**3 / 10000
-
-plt.loglog(wtime_cofactor[:,0],wtime_cofactor[:,1],'-*',wtime_lu[:,0],wtime_lu[:,1],'-*',y_factorial,'--',y_power3,'--')
-plt.title('Time as a function of size of the Matrix (n x n)')
-plt.xlabel('Matrix size (n)')
-plt.ylabel('Time in seconds (s)')
-plt.xlim([0,16])
-plt.ylim([0,1000000000000])
-plt.legend(('Computation: Cofactor','Computation: LUP','Order of Complexity: n!','Order of Complexity: n^3'), loc='lower left')
+## This plot shows the computation time versus the matrix size. Also shows the order of complexity for comparison.
+plt.loglog(wtime[:,0],wtime[:,1],'-o',wtime[:,0],wtime[:,2],'-o',y_LU,'--',y_cofactor,'--')
+plt.title('Computation time vs. matrix size')
+plt.xlabel('Matrix size [n]')
+plt.ylabel('Time [s]')
+plt.xlim([2,12])
+plt.ylim(bottom=0.1/10000000,top=100000000)
+plt.legend(('Wall Time: LUP','Wall Time: Cofactor','Order of Complexity: n^3','Order of Complexity: n!'), loc='upper left')
 plt.show()
 
-plt.loglog(accuracy[:,0],accuracy[:,1],'-r')
-plt.loglog(accuracy[:,0],accuracy[:,2],'-k')
+# This plot shows the difference in the values of determinants computed using the two methods.
+plt.loglog(error_absolute[:,0],error_absolute[:,1],'-o')
+plt.title('Difference in determinant vs. matrix size')
+plt.xlabel('Matrix size [n]')
+plt.ylabel('Difference [unitless]')
+plt.show()
+
+## This plot shows the relative errors with respect to 'true' determinant computed using numpy.
+plt.loglog(error_rel[:,0],error_rel[:,1],'-o',error_rel[:,0],error_rel[:,2],'-o')
+plt.title('Relative errors vs. matrix size')
+plt.xlabel('Matrix size [n]')
+plt.ylabel('Relative error [unitless]')
+plt.legend(('Relative error: LUP','Relative error: Cofactor'))
+plt.show()

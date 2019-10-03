@@ -1,0 +1,92 @@
+\documentclass[11pt, oneside]{article}
+\usepackage{geometry}
+\geometry{letterpaper, margin=1in,top=0.75in}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\title{MCSC 6020G - Numerical Analysis \\
+        \Large Assignment 1}
+\author{Parikshit Bajpai}
+\date{}
+
+\newtheorem*{remark}{To prove}
+
+\begin{document}
+\maketitle
+
+\section*{Question 1}
+\subsection*{(a) Skew-symmetric matrix}
+
+  A square matrix $A$ is called skew-symmetric if $A^T = -A \;\; \text{i.e.} \;\; a_{ij}=-a{ji}$. A general example of such a matrix is:
+  \begin{equation*}
+      A=
+      \begin{bmatrix}
+        0              & \lambda_{11}  & \dots   & \lambda_{1n} \\
+        -\lambda_{11}  & 0             & \dots   & \lambda_{2n} \\
+        \vdots         & \vdots        & \ddots  & \vdots \\
+        -\lambda_{1n}  & -\lambda_{2n} & \dots   & 0
+      \end{bmatrix}
+  \end{equation*}
+  where, $\lambda_{ij} \in \mathbb{R}$.
+
+  A specific example of a skew-symmetric matrix is as follows:
+  \begin{equation*}
+    A=
+    \begin{bmatrix}
+      0              & \pi        & \sqrt{2} \\
+      -\pi           & 0          & -e \\
+      -\sqrt{2}      & e          & 0
+    \end{bmatrix}
+  \end{equation*}
+
+\subsection*{(b) Orthogonality}
+
+\begin{remark}
+If $B$ is a skew-symmetric matrix, then $A = (\mathbb{I}+B)(\mathbb{I}-B)^{-1}$ is orthogonal, where $\mathbb{I}$ is an identity matrix.
+\end{remark}
+\begin{proof}
+  For a matrix $A$ to be orthogonal, $A^T A = 1$, i.e., $A^T = A^{-1}$. For a skew-symmetric matrix $B$, we can define $ A = (\mathbb{I}+B)(\mathbb{I}-B)^{-1}$. Then,
+  \begin{align*}
+    A^T   &= \left(\left(\mathbb{I}+B\right)\left(\mathbb{I}-B\right)^{-1}\right)^T \\
+          &= \left(\left(\mathbb{I}-B\right)^{-1}\right)^T\left(\mathbb{I}+B\right)^T     && \left(\because (XY)^T = X^T Y^T\right)\\
+          &= \left(\left(\mathbb{I}-B\right)^T\right)^{-1}\left(\mathbb{I}+B\right)^T     && \left(\because (X^{-1})^T = (X^T)^{-1}\right)\\
+          &= \left(\mathbb{I}^T-B^T\right)^{-1}\left(\mathbb{I}^T+B^T\right)              && \left(\text{Distributivity}\right) \\
+          &= \left(\mathbb{I} + B\right)^{-1}\left(\mathbb{I}-B\right)                    && \left(\because B^T = - B\right)\\
+          &= \left(\mathbb{I}-B\right)\left(\mathbb{I}+B\right)^{-1}                      && \left(\text{Commutativity\footnotemark}\right)\\
+          &= A^{-1}                                                 && \qedhere
+  \end{align*}
+\end{proof}
+\footnotetext{$(I+B)^{-1}$ and $(I-B)$ are simultaneously diagonalisable matrices and, in such cases, matrix multiplication is commutative.}
+
+\section*{Question 2}
+  \begin{remark}
+    For a complex-valued vector $v \in \mathbb{C}^n$, $\frac{1}{n}\|v\|_1 \leq \|v\|_{\infty} \leq \|v\|_2$
+  \end{remark}
+  \begin{proof}
+    Let $\|v\|_{\infty} = \max\limits_i |v_i|$ and $\|v\|_p = \left(\sum\limits_i |v_i|^p \right)^{\frac{1}{p}}$
+    \begin{align*}
+      \|v\|_p &= \|v\|_{\infty} \frac{\left(\sum_i |v_i|^p\right)^{\frac{1}{p}}}{\|v\|_{\infty}} \\
+              &= \|v\|_{\infty} \left(\sum_i\frac{|v_i|^p}{\|v\|_{\infty}^p}\right)^{\frac{1}{p}} \\
+              &= \|v\|_{\infty} \left(\sum_i \left(\frac{|v_i|}{\|v\|_{\infty}}\right)^{p}\right)^{\frac{1}{p}} \\
+              &\leq \|v\|_{\infty} n^{\frac{1}{p}} && \left(\because \left(\frac{|v_i|}{\|x\|_{\infty}}\right)^p \leq 1, \forall i\right) \\
+    \end{align*}
+    Thus we have
+    \begin{equation*}
+      \|v\|_{\infty} \leq \|v\|_{p} \leq \|v\|_{\infty} n^{\frac{1}{p}}
+    \end{equation*}
+    So, taking $p=1$ and $p=2$, we get
+    \begin{align*}
+      \|v\|_{\infty} \leq \|v\|_{1} \leq \|v\|_{\infty} n && (p=1)\\
+      \|v\|_{\infty} \leq \|v\|_{p} \leq \|v\|_{\infty} \sqrt{n} && (p=2)\\
+    \end{align*}
+    Therefore, from the above two inequalities,
+    \begin{align*}
+      \frac{1}{n}\|v\|_1 \leq \|v\|_{\infty} \leq \|v\|_2 && \qedhere
+    \end{align*}
+  \end{proof}
+
+\end{document}

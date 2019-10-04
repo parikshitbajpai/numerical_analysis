@@ -20,7 +20,6 @@
 
 \section*{Question 1}
 \subsection*{(a) Skew-symmetric matrix}
-
   A square matrix $A$ is called skew-symmetric if $A^T = -A \;\; \text{i.e.} \;\; a_{ij}=-a{ji}$. A general example of such a matrix is:
   \begin{equation*}
       A=
@@ -44,23 +43,22 @@
   \end{equation*}
 
 \subsection*{(b) Orthogonality}
-
-\begin{remark}
-If $B$ is a skew-symmetric matrix, then $A = (\mathbb{I}+B)(\mathbb{I}-B)^{-1}$ is orthogonal, where $\mathbb{I}$ is an identity matrix.
-\end{remark}
-\begin{proof}
-  For a matrix $A$ to be orthogonal, $A^T A = 1$, i.e., $A^T = A^{-1}$. For a skew-symmetric matrix $B$, we can define $ A = (\mathbb{I}+B)(\mathbb{I}-B)^{-1}$. Then,
-  \begin{align*}
-    A^T   &= \left(\left(\mathbb{I}+B\right)\left(\mathbb{I}-B\right)^{-1}\right)^T \\
-          &= \left(\left(\mathbb{I}-B\right)^{-1}\right)^T\left(\mathbb{I}+B\right)^T     && \left(\because (XY)^T = X^T Y^T\right)\\
-          &= \left(\left(\mathbb{I}-B\right)^T\right)^{-1}\left(\mathbb{I}+B\right)^T     && \left(\because (X^{-1})^T = (X^T)^{-1}\right)\\
-          &= \left(\mathbb{I}^T-B^T\right)^{-1}\left(\mathbb{I}^T+B^T\right)              && \left(\text{Distributivity}\right) \\
-          &= \left(\mathbb{I} + B\right)^{-1}\left(\mathbb{I}-B\right)                    && \left(\because B^T = - B\right)\\
-          &= \left(\mathbb{I}-B\right)\left(\mathbb{I}+B\right)^{-1}                      && \left(\text{Commutativity\footnotemark}\right)\\
-          &= A^{-1}                                                 && \qedhere
-  \end{align*}
-\end{proof}
-\footnotetext{$(I+B)^{-1}$ and $(I-B)$ are simultaneously diagonalisable matrices and, in such cases, matrix multiplication is commutative.}
+  \begin{remark}
+    If $B$ is a skew-symmetric matrix, then $A = (\mathbb{I}+B)(\mathbb{I}-B)^{-1}$ is orthogonal, where $\mathbb{I}$ is an identity matrix.
+  \end{remark}
+  \begin{proof}
+    For a matrix $A$ to be orthogonal, $A^T A = 1$, i.e., $A^T = A^{-1}$. For a skew-symmetric matrix $B$, we can define $ A = (\mathbb{I}+B)(\mathbb{I}-B)^{-1}$. Then,
+    \begin{align*}
+      A^T   &= \left(\left(\mathbb{I}+B\right)\left(\mathbb{I}-B\right)^{-1}\right)^T \\
+            &= \left(\left(\mathbb{I}-B\right)^{-1}\right)^T\left(\mathbb{I}+B\right)^T     && \left(\because (XY)^T = X^T Y^T\right)\\
+            &= \left(\left(\mathbb{I}-B\right)^T\right)^{-1}\left(\mathbb{I}+B\right)^T     && \left(\because (X^{-1})^T = (X^T)^{-1}\right)\\
+            &= \left(\mathbb{I}^T-B^T\right)^{-1}\left(\mathbb{I}^T+B^T\right)              && \left(\text{Distributivity}\right) \\
+            &= \left(\mathbb{I} + B\right)^{-1}\left(\mathbb{I}-B\right)                    && \left(\because B^T = - B\right)\\
+            &= \left(\mathbb{I}-B\right)\left(\mathbb{I}+B\right)^{-1}                      && \left(\text{Commutativity\footnotemark}\right)\\
+            &= A^{-1}                                                 && \qedhere
+    \end{align*}
+  \end{proof}
+  \footnotetext{$(I+B)^{-1}$ and $(I-B)$ are simultaneously diagonalisable matrices and, in such cases, matrix multiplication is commutative.}
 
 \section*{Question 2}
   \begin{remark}
@@ -72,9 +70,9 @@ If $B$ is a skew-symmetric matrix, then $A = (\mathbb{I}+B)(\mathbb{I}-B)^{-1}$ 
       \|v\|_p &= \|v\|_{\infty} \frac{\left(\sum_i |v_i|^p\right)^{\frac{1}{p}}}{\|v\|_{\infty}} \\
               &= \|v\|_{\infty} \left(\sum_i\frac{|v_i|^p}{\|v\|_{\infty}^p}\right)^{\frac{1}{p}} \\
               &= \|v\|_{\infty} \left(\sum_i \left(\frac{|v_i|}{\|v\|_{\infty}}\right)^{p}\right)^{\frac{1}{p}} \\
-              &\leq \|v\|_{\infty} n^{\frac{1}{p}} && \left(\because \left(\frac{|v_i|}{\|x\|_{\infty}}\right)^p \leq 1, \forall i\right) \\
+              &\leq \|v\|_{\infty} n^{\frac{1}{p}} && \left(\because \left(\frac{|v_i|}{\|v\|_{\infty}}\right)^p \leq 1, \forall i\right) \\
     \end{align*}
-    Thus we have
+    Thus we have\footnote{Since $\|v\|_{\infty} = \max\limits_i |v_i|$ while the other norms can be expressed as $\|v\|_{p} = \max\limits_i |v_i| + C$, where C is a positive number, $|v\|_{\infty} \leq \|v\|_{p}$.}
     \begin{equation*}
       \|v\|_{\infty} \leq \|v\|_{p} \leq \|v\|_{\infty} n^{\frac{1}{p}}
     \end{equation*}
@@ -89,4 +87,16 @@ If $B$ is a skew-symmetric matrix, then $A = (\mathbb{I}+B)(\mathbb{I}-B)^{-1}$ 
     \end{align*}
   \end{proof}
 
+\section*{Question 3}
+\subsection*{(a) Determinant of a matrix using LU factorisation}
+  Since determinant respects matrix multiplication,
+  \begin{align*}
+    PA &= LU \\
+    \det {PA} &= \det {LU} \\
+    \det{P} \det{A} &= \det{L} \det{U} \\
+    \det{A} &=  \begin{cases}
+                - \det{L} \det{U} & \text{Odd number of row exchanges} \\
+                \det{L} \det{U} & \text{Even number of row exchanges} \\
+              \end{cases}
+  \end{align*}
 \end{document}

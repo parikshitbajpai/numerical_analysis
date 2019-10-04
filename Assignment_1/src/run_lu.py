@@ -34,10 +34,6 @@ for k in range(0,ntrials):
     ## The following commands use numpy to compute determinant of A and is assumed to be the "correct" value of determinant.
     det_np = np.linalg.det(A)
 
-    ## Condition number of the matrix.
-    condition_number[k,0] = n
-    condition_number[k,1] = np.linalg.cond(A,2)
-
     ## The absolute errors are computed with respect to determinant using numpy which is assumed to be the 'true' value.
     error_absolute[k,0] = n
     error_absolute[k,1] = abs(det_lu-det_np)
@@ -69,12 +65,11 @@ plt.legend(('Wall Time: LUP','Order of Complexity: n^3'), loc='upper left')
 plt.show()
 
 # This plot shows the absolute error with respect to 'true' determinant computed using numpy.
-plt.loglog(error_absolute[:,0],error_absolute[:,1],'-o',condition_number[:,0],condition_number[:,1],'--')
+plt.loglog(error_absolute[:,0],error_absolute[:,1],'-o')
 plt.title('Absolute errors vs. matrix size')
 plt.xlabel('Matrix size [n]')
 plt.ylabel('Absolute error [unitless]')
 plt.xlim([2,256])
-plt.legend(('Absolute error: LUP','Condition number'))
 plt.show()
 
 ## This plot shows the relative errors with respect to 'true' determinant computed using numpy.

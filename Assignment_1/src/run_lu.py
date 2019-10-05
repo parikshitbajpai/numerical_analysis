@@ -9,10 +9,9 @@ import scipy
 import math
 import matplotlib.pyplot as plt                     # For plotting
 import matplotlib.pylab as plt
-from LUP import LUP
 from Determinant_LUP import determinant_LUP
 
-ntrials = 8                                         # Number of trials
+ntrials = 4                                         # Number of trials
 wtime = np.zeros((ntrials,2))                       # Array to store wall time
 error_rel = np.zeros((ntrials,2))                   # Array to store relative error
 error_absolute = np.zeros((ntrials,2))              # Array to store absolute error
@@ -24,8 +23,7 @@ for k in range(0,ntrials):
 
     ## The following commands use the LUP decomposition to compute determinant of A.
     start_lu = time.time()                          # Get start time for LUP
-    L,U,P,par = LUP(A)
-    det_lu = determinant_LUP(L)*determinant_LUP(U)*par
+    det_lu = determinant_LUP(A)
     elapsed_lu = time.time()-start_lu               # Elapsed time using LUP
 
     # Print wall time to screen

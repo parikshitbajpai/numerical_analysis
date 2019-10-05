@@ -9,7 +9,6 @@ import scipy
 import math
 import matplotlib.pyplot as plt                     # For plotting
 import matplotlib.pylab as plt
-from LUP import LUP
 from Determinant_LUP import determinant_LUP
 from Cofactor import comp_minor
 from Cofactor import determinant_cofactor
@@ -25,8 +24,7 @@ for k in range(0,ntrials):
 
     ## The following commands use the LUP decomposition to compute determinant of A.
     start_lu = time.time()                          # Get start time for LUP
-    L,U,P,par = LUP(A)
-    det_lu = determinant_LUP(L)*determinant_LUP(U)*par
+    det_lu = determinant_LUP(A)
     elapsed_lu = time.time()-start_lu               # Elapsed time using LUP
 
     ## The following commands use the cofactor method to compute determinant of A.

@@ -1,0 +1,46 @@
+\begin{algorithm}
+  \DontPrintSemicolon
+  \KwData{Matrix, $A$}
+  \KwResult{Determinant of matrix, $\det (A)$}\;
+  \caption{Determinant of a matrix using LUP factorisation}
+  \SetKwFunction{DetLUP}{determinant\_LUP}
+  \SetKwFunction{DetTri}{determinant\_triangular}
+  \SetKwFunction{LUP}{LUP\_factorisation}
+  \SetKwProg{Fn}{Function}{:}{}
+  \Fn(\tcc*[f]{Computes determinant}){\DetLUP{Matrix $A$}}{
+    \;
+    \KwIn{Matrix ($A$)}
+    \KwOut{Determinant ($\det A$)}
+    \;
+    \KwData{Lower triangular matrix ($L$), Upper triangular matrix ($U$), Permutation matrix ($P$), Parity ($par$)}
+    \;
+    \tcc{$par$ accounts for the number of row exchanges during LUP factorisation and is equal to 1 for even no. of exchanges and -1 for odd no. of exchanges.}\;
+    $L, \, U, \, P, \, par \leftarrow \LUP{A}$ \tcc*{Call function for LUP factorisation}
+    $determinant \leftarrow par\times\DetTri{L}\times\DetTri{U}$\;
+    \;
+    \Return $determinant$
+    }\;
+  \Fn(\tcc*[f]{Computes det of triangular matrix}){\DetTri{Matrix $A$}}{
+    \;
+    \KwIn{Triangular matrix ($A$)}
+    \KwOut{{Determinant ($\det A$)}}
+    \;
+    \textbf{Initialize:} \;
+    $n \leftarrow \text{ Size of }A$ \tcc*{Size of matrix computed using numpy}
+    $determinant \leftarrow 1$ \tcc*{Stores determinant}
+    $r_i \; \& \; r_j \leftarrow 0$ \tcc*{Indices for minor matrix}
+    \;
+    \For(\tcc*[f]{Loop over rows of $A$}){$i=1$ \KwTo $n$}{
+    $determinant \leftarrow determinant * a_{ii}$ \tcc*{Product of diagonal elements}
+    }\;
+  \Return $determinant$
+  }\;
+  \Fn(\tcc*[f]{Performs LUP factorisation}){\LUP{Matrix $A$}}{
+    \;
+    \KwIn{Triangular matrix ($A$)}
+    \KwOut{Lower triangular matrix ($L$), Upper triangular matrix ($U$), Permutation matrix ($P$), Parity ($par$)}
+    \;
+    \tcc{$par$ accounts for the number of row exchanges during LUP factorisation and is equal to 1 for even no. of exchanges and -1 for odd no. of exchanges.}\;
+    \tcc{The details of LUP factorization have been skipped for brevity.}\;
+  \Return $determinant$}
+\end{algorithm}

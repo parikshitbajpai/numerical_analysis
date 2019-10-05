@@ -1,12 +1,13 @@
 \documentclass[11pt, oneside]{article}
 \usepackage{geometry}
-\geometry{letterpaper, margin=1in,top=0.75in}
+\geometry{letterpaper, margin=0.8in,top=0.75in}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
+\usepackage[ruled,vlined]{algorithm2e}
 
 \title{MCSC 6020G - Numerical Analysis \\
         \Large Assignment 1}
@@ -14,6 +15,7 @@
 \date{}
 
 \newtheorem*{remark}{To prove}
+\renewcommand\qedsymbol{$\blacksquare$}
 
 \begin{document}
 \maketitle
@@ -39,7 +41,7 @@
       0              & \pi        & \sqrt{2}     & \sqrt{5}\\
       -\pi           & 0          & -\sqrt{3}    & -e\\
       -\sqrt{2}      & \sqrt{3}   & 0            & \sqrt{7}\\
-      -\sqrt{5}      & e          & -sqrt             & 0
+      -\sqrt{5}      & e          & -\sqrt{7}    & 0
     \end{bmatrix}
   \end{equation*}
 
@@ -67,13 +69,13 @@
   \end{remark}
   \begin{proof}
     Let $\|v\|_{\infty} = \max\limits_i |v_i|$ and $\|v\|_p = \left(\sum\limits_i |v_i|^p \right)^{\frac{1}{p}}$
-    \begin{align*}
+    \begin{align*}subsection name
       \|v\|_p &= \|v\|_{\infty} \frac{\left(\sum_i |v_i|^p\right)^{\frac{1}{p}}}{\|v\|_{\infty}} \\
               &= \|v\|_{\infty} \left(\sum_i\frac{|v_i|^p}{\|v\|_{\infty}^p}\right)^{\frac{1}{p}} \\
               &= \|v\|_{\infty} \left(\sum_i \left(\frac{|v_i|}{\|v\|_{\infty}}\right)^{p}\right)^{\frac{1}{p}} \\
               &\leq \|v\|_{\infty} n^{\frac{1}{p}} && \left(\because \left(\frac{|v_i|}{\|v\|_{\infty}}\right)^p \leq 1, \forall i\right) \\
     \end{align*}
-    Thus we have\footnote{Since $\|v\|_{\infty} = \max\limits_i |v_i|$ while the other norms can be expressed as $\|v\|_{p} = \max\limits_i |v_i| + C$, where C is a positive number, $|v\|_{\infty} \leq \|v\|_{p}$.}
+    Thus we have\footnote{$\|v\|_{\infty} = \max\limits_i |v_i|$ while the other norms can be expressed as $\|v\|_{p} = \max\limits_i |v_i| + C$ where $C \in \mathbb{R}_{\ge 0}$. Therefore, $|v\|_{\infty} \leq \|v\|_{p}$.}
     \begin{equation*}
       \|v\|_{\infty} \leq \|v\|_{p} \leq \|v\|_{\infty} n^{\frac{1}{p}}
     \end{equation*}
@@ -88,16 +90,50 @@
     \end{align*}
   \end{proof}
 
+  \noindent\textbf{Example of a vector satisfying the left equality:} \begin{equation*}
+    V = \begin{bmatrix}
+      3 + 4 i & 4 - 3 i & 5
+  \end{bmatrix}
+  \end{equation*}
+
+  \noindent\textbf{Example of a vector satisfying the right equality:} \begin{equation*}
+    V = \begin{bmatrix}
+      3 + 4 i & 4 - 3 i & 5
+  \end{bmatrix}
+  \end{equation*}
+
+  \noindent\textbf{Example of a vector simultaneously satisfying both the equalities:} \begin{equation*}
+    V = \begin{bmatrix}
+      C
+  \end{bmatrix} \; \forall C \in \mathbb{C}
+  \end{equation*}
+  \vfill
+
 \section*{Question 3}
 \subsection*{(a) Determinant of a matrix using LU factorisation}
-  Since determinant respects matrix multiplication,
+  LU factorisation results in two triangular matrices. Since determinant respects matrix multiplication, LUP factorizarion can be used to find the determinant of a matrix as shown:
   \begin{align*}
     PA &= LU \\
-    \det {PA} &= \det {LU} \\
-    \det{P} \det{A} &= \det{L} \det{U} \\
-    \det{A} &=  \begin{cases}
-                - \det{L} \det{U} & \text{Odd number of row exchanges} \\
-                \det{L} \det{U} & \text{Even number of row exchanges} \\
+    \det {(PA)} &= \det {(LU)} \\
+    \det{(P)} \det{(A)} &= \det{(L)} \det{(U)} \\
+    \det{(A)} &=  \begin{cases}
+                - \det{(L)} \det{(U)} & \text{Odd number of row exchanges}\footnotemark \\
+                \det{(L)} \det{(U)} & \text{Even number of row exchanges} \\
+              \end{cases} \\
+              &= \begin{cases}
+                - \prod_{i=1}^n l_{ii} \prod_{j=1}^n u_{jj} & \text{Odd number of row exchanges}\footnotemark \\
+                \prod_{i=1}^n l_{ii} \prod_{j=1}^n u_{jj} & \text{Even number of row exchanges} \\
               \end{cases}
   \end{align*}
+  \addtocounter{footnote}{-1}
+  \footnotetext{Determinant of the permutation matrix is -1 if there's an odd number of row exchanges and 1 if there's an even number of row exchanges.}
+  \stepcounter{footnote}
+  \footnotetext{Determinant of a triangular matrix is equal to the product of its diagonal elements.}
+
+\subsection*{(b \& c) Pseudo-codes}
+The pseudo codes for the cofactor expansion method and
+\newpage
+\input{Algo_1.tex}
+\input{Algo_2.tex}
+
 \end{document}

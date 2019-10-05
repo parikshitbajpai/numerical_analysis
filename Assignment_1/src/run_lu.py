@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt                     # For plotting
 import matplotlib.pylab as plt
 from Determinant_LUP import determinant_LUP
 
-ntrials = 4                                         # Number of trials
+ntrials = 8                                         # Number of trials
 wtime = np.zeros((ntrials,2))                       # Array to store wall time
 error_rel = np.zeros((ntrials,2))                   # Array to store relative error
 error_absolute = np.zeros((ntrials,2))              # Array to store absolute error

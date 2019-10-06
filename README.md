@@ -5,7 +5,7 @@ This repository contains the codes, documents and assignments for **MCSC 6020G -
 Assignments submitted to _Prof. Lennaert van Veen_
 
 ## Assignment 1
-*	All files as part of this submission are in the directory ```Assignment_1```
+*	All files part of this submission are in the directory ```Assignment_1```
 	*	```src``` contains all the python scripts.
 	*	```latex``` contains all the raw files and figures for the report.
 	*	The report is titled ```Assignment_1.pdf```
@@ -16,4 +16,4 @@ Assignments submitted to _Prof. Lennaert van Veen_
 3. To run both _Cofactor expansion_ and _LUP factorisation_ methods execute ```make run```
 4. To run only _Cofactor expansion_ execute ```make run-cofactor```
 5. To run only _LUP factorisation_ execute ```make run-lu```
-6. To clean up the python build files execute ```make clean``` 
+6. To clean up the python build files execute ```make clean```

@@ -1,0 +1,50 @@
+\begin{algorithm}\label{algo:Cofactor}
+  \DontPrintSemicolon
+  \KwData{Matrix, $A$}
+  \KwResult{Determinant of matrix, $\det (A)$}\;
+  \caption{Determinant of a matrix using cofactor expansion}
+  \SetKwFunction{DetCof}{determinant\_cofactor}
+  \SetKwFunction{Min}{comp\_minor}
+  \SetKwProg{Fn}{Function}{:}{}
+  \Fn(\tcc*[f]{Recursively computes determinant}){\DetCof{Matrix $A$}}{
+    \;
+    \KwIn{Matrix ($A$)}
+    \KwOut{Determinant ($\det A$)}
+    \;
+    \textbf{Initialize:} \;
+    $n \leftarrow \text{ Size of }A$ \tcc*{Size of matrix computed using numpy}
+    $det\_2 \leftarrow 0$ \tcc*{Stores determinant of 2$\times$2 matrix}
+    $determinant \leftarrow 0$ \tcc*{Stores determinant of n$\times$n matrix}
+    \;
+    \eIf{$n=2$}{
+    $det\_2 \leftarrow a_{11}a_{22} - a_{21}a_{12}$\;
+    \Return $det\_2$}
+    {
+    \For(\tcc*[f]{Cofactor expansion about first row}){$i=1$ \KwTo $n$}{\begin{align*}
+        determinant \leftarrow \; &determinant \\ &+ (-1)^{i+1} \times a_{1i} \times \DetCof{\Min{A,n,1,i}}
+    \end{align*}
+    }
+    \Return $determinant$
+    }
+    }\;
+  \Fn(\tcc*[f]{Computes minor matrix}){\Min{Matrix $A$, Size $n$, Row $r$, Column $c$}}{
+    \;
+    \KwIn{Matrix ($A$), Size of $A$ (n), Row ($r$), Column ($c$) }
+    \KwOut{Minor matrix ($M_{r,j}$)}
+    \;
+    \textbf{Initialize:} \;
+    $minor \leftarrow \text{ Zero matrix of size } (n-1)\times(n-1)$ \tcc*{Stores minor matrix}
+    $r_i \; \& \; r_j \leftarrow 0$ \tcc*{Indices for minor matrix}
+    \;
+    \For(\tcc*[f]{Loop over rows of $A$}){$i=1$ \KwTo $n$}{
+    $r_j \leftarrow 0$ \tcc*{Reset column index of minor at start of each row}
+    \eIf{$i = r$}{Continue to next iteration \tcc*{Omitting the row r}}{
+    \For(\tcc*[f]{Loop over columns of $A$}){$i=1$ \KwTo $n$}{
+    \eIf{$j = c$}{Continue to next iteration \tcc*{Omitting the column c}}{
+    $minor_{r_i r_j} \leftarrow A_{ij}$ \tcc*{Assigning elements to minor matrix}
+    $r_j \leftarrow r_j + 1$}
+    }
+    $r_i \leftarrow r_i + 1$}
+    }\;
+  \Return $minor$}
+\end{algorithm}

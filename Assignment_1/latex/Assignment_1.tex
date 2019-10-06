@@ -9,6 +9,7 @@
 \usepackage{amsthm}
 \usepackage[ruled,vlined]{algorithm2e}
 \usepackage{graphicx}
+\usepackage{siunitx}
 
 \title{MCSC 6020G - Numerical Analysis \\
         \Large Assignment 1}
@@ -178,19 +179,49 @@ The pseudo-code for the implementation of the cofactor expansion method has been
 \end{proof}
 
 \subsection*{(c) Computations}
-The cofactor expansion and LU factorisation algorithms discussed above were tested and compared for multiple matrix sizes and the obtained results are discussed hereon. As shown in fig.~\ref{fig:1}, the cofactor expansion method is quick for very small matrices but becomes very slow as the matrix increases. The LUP factorisation method on the other hand is extremely fast. In fact, LUP marginally outperforms cofactor expansion for a $4\times4$ matrix and observed to be slower than cofactor method only for $2\times2$ matrix where the cost of performing the LUP factorisation is significantly higher than the couple of FLOPS required for finding determinant by cofactor expansion. This behaviour is as expected from the order of complexity calculation shown above and the trend can be observed in fig.~\ref{fig:1} where the computation times of each method follow the orders of complexity trend shown by the dashed lines. Furthermore, the computation of determinant of large matrices using the cofactor method takes insanely long which is why the computations are performed only for matrix sizes of upto $12\times12$.
-  \begin{figure}[h]
+The cofactor expansion and LU factorisation algorithms discussed above were tested and compared for multiple matrix sizes and the obtained results are discussed hereon. As shown in and fig.~\ref{fig:1}, the cofactor expansion method is quick for very small matrices but becomes very slow as the matrix increases. The LUP factorisation method on the other hand is extremely fast. In fact, LUP marginally outperforms cofactor expansion for a $4\times4$ matrix and observed to be slower than cofactor method only for $2\times2$ matrix where the cost of performing the LUP factorisation is significantly higher than the couple of FLOPS required for finding determinant by cofactor expansion. This behaviour is as expected from the order of complexity calculation shown above and the trend can be observed in fig.~\ref{fig:1} where the computation times of each method follow the orders of complexity trend shown by the dashed lines\footnote{The computation time for LUP factorisation of $12\times12$ matrix seems to be slightly lower than the $10\times10$ matrix. This anomalous result might be attributed to the randomness of the matrix but the behaviour was present over multiple runs and is still unexplained.}. Furthermore, the computation of determinant of large matrices using the cofactor method takes insanely long limiting the feasibility of the method to matrices of upto $12\times12$ on the machine used for computations.
+  \begin{figure}[]
         \centering
         \includegraphics[width=0.75\textwidth]{figure/Figure_1.eps}
         \caption{Wall times vs. matrix size for the Cofactor expansion and LUP factorisation methods.}
         \label{fig:1}
   \end{figure}
 
-For the purpose of analysis, the determinant values obtained through the two algorithms were compared with the results computed using \texttt{numpy} which uses the \texttt{LAPACK} subroutine \texttt{dgetrf}. Fig.~\ref{fig:2}
-\begin{figure}[h]
+For the purpose of analysis, the determinant values obtained through the two algorithms were compared with the results computed using \texttt{numpy} which uses the \texttt{LAPACK} subroutine \texttt{dgetrf}. The absolute error was then defined as $$e_{abs} = |\det(A)_{method} - \det(A)_{numpy}|$$ As shown in fig.~\ref{fig:2}, the absolute errors obtained through LUP factorisation were around 2 orders higher than the errors obtained through cofactor expansion. This can be attributed to the rounding errors during the LUP factorisation step. Since, cofactor matrix does not involve factorisation step, the errors due to factorisation due not arise and the errors in determinants are lower compared to LUP factorisation. However, the errors in both the cases were less than the order of precision of floating point numbers. The same arguments hold for the relative error which is defined as $$e_{rel} = \frac{|\det(A)_{method} - \det(A)_{numpy}|}{|\det(A)_{numpy}|}$$ The relative errors have been shown in fig.~\ref{fig:3}. It must be mentioned that due to the relatively small number of feasible computations, a notable error trend wasn't observed.
+\begin{figure}[]
       \centering
-      \includegraphics[width=0.75\textwidth]{figure/Figure_1.eps}
-      \caption{Absolute error (w.r.t. numpy)  vs. matrix size for the Cofactor expansion and LUP factorisation methods. The difference between the results from the two methods is also shown.}
+      \includegraphics[width=0.75\textwidth]{figure/Figure_2.eps}
+      \caption{Absolute error (w.r.t. \texttt{numpy})  vs. matrix size for the Cofactor expansion and LUP factorisation methods. The difference between the results from the two methods is also shown.}
       \label{fig:2}
 \end{figure}
+\begin{figure}[]
+      \centering
+      \includegraphics[width=0.75\textwidth]{figure/Figure_3.eps}
+      \caption{Relative error (w.r.t. \texttt{numpy})  vs. matrix size for the Cofactor expansion and LUP factorisation methods.}
+      \label{fig:3}
+\end{figure}
+
+\begin{figure}[]
+      \centering
+      \includegraphics[width=0.75\textwidth]{figure/Figure_4.eps}
+      \caption{Wall times vs. matrix size for the LUP factorisation method.}
+      \label{fig:4}
+\end{figure}
+\begin{figure}[]
+      \centering
+      \includegraphics[width=0.75\textwidth]{figure/Figure_5.eps}
+      \caption{Absolute error (w.r.t. \texttt{numpy})  vs. matrix size for the LUP factorisation method.}
+      \label{fig:5}
+\end{figure}
+\begin{figure}[]
+      \centering
+      \includegraphics[width=0.75\textwidth]{figure/Figure_6.eps}
+      \caption{Relative error (w.r.t. \texttt{numpy})  vs. matrix size for the LUP factorisation method.}
+      \label{fig:6}
+\end{figure}
+
+The LUP factorisation method does not face the computational limitations observed in the cofactor expansion method and therefore the computations were performed for matrices of sizes upto $256\times256$. The results are shown in figs.\ref{fig:4}--\ref{fig:6}. The computation time follows the $\mathcal{O}(N^3)$ trend and the absolute error grows exponentially with matrix size.
+
+\subsection*{Summary of results}
+The order of complexity for the cofactor expansion method was demonstrated to be $\mathcal{O}(N!)$ while that for LUP factorisation was demonstrated to be $\mathcal{O}(N^3)$. As a result, LUP factorisation results in much faster calculation of the determinant of a matrix albeit at the cost of accuracy. However, the errors are well below the precision of floating point numbers which makes LUP factorisation computationally more efficient. The theoretically foreseen behaviour was observed in the computational results thus \textit{a-posteriori} verifying the theoretical proofs.
 \end{document}

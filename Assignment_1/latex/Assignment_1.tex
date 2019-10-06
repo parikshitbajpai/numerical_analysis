@@ -8,6 +8,7 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage[ruled,vlined]{algorithm2e}
+\usepackage{graphicx}
 
 \title{MCSC 6020G - Numerical Analysis \\
         \Large Assignment 1}
@@ -15,6 +16,7 @@
 \date{}
 
 \newtheorem*{remark}{To prove}
+\newtheorem*{order}{Complexity}
 \renewcommand\qedsymbol{$\blacksquare$}
 
 \begin{document}
@@ -95,10 +97,20 @@
       3 + 4 i & 4 - 3 i & 5
   \end{bmatrix}
   \end{equation*}
+  \begin{equation*}
+    V = \begin{bmatrix}
+      1 - 7 i & 5 + 5 i & -\sqrt{50} & \sqrt{50}i
+  \end{bmatrix}
+  \end{equation*}
 
   \noindent\textbf{Example of a vector satisfying the right equality:} \begin{equation*}
     V = \begin{bmatrix}
-      3 + 4 i & 4 - 3 i & 5
+      1 & 0 & 0
+  \end{bmatrix}
+  \end{equation*}
+  \begin{equation*}
+    V = \begin{bmatrix}
+      i & 0 & 0 & 0
   \end{bmatrix}
   \end{equation*}
 
@@ -130,10 +142,55 @@
   \stepcounter{footnote}
   \footnotetext{Determinant of a triangular matrix is equal to the product of its diagonal elements.}
 
-\subsection*{(b \& c) Pseudo-codes}
-The pseudo codes for the cofactor expansion method and
-\newpage
-\input{Algo_1.tex}
-\input{Algo_2.tex}
+  The pseudo-code for the implementation of the above method has been shown in algo.~\ref{algo:LUP}.
+  \input{Algo_2.tex}
 
+  \begin{order}
+    The order of complexity of determinant computation using LUP decomposition is $\mathcal{O}(N^3)$, where $N$ is the dimension of matrix.
+  \end{order}
+  \begin{proof}
+    The order of complexity of LUP factorisation is well known as $\mathcal{O}(N^3)$. The determinant of a triangular matrix is the product of its diagonal elements resulting in $(n-1)$ FLOPS. Therefore, after the LUP factorisation, the number of FLOPS for computing the determinant equals $[2(n-1)+2]$ (computing two determinant of triangular matrix, multiplying them and multiplying by parity).
+
+    The highest order of complexity of the complete algorithm results from the LUP factorisation step and thus the order of complexity of the algorithm itself is $\mathcal{O}(N^3)$.
+  \end{proof}
+
+\subsection*{(b) Determinant of a matrix using Cofactor expansion}
+If $A$ is a $n\times n$ matrix with elements $a_{ij}, i,j \in \{1,2,...,n\}$, its determinant is a weighted sum of the determinants of $n$ sub-matrices (or minors) of $A$, each of size $(n-1)\times (n-1)$.
+\begin{equation*}
+  \det (A) = \sum_{i=1}^{n} (-1)^{i+j} a_{ij}M_{i,j} = \sum_{j=1}^{n} (-1)^{i+j} a_{ij}M_{i,j}
+\end{equation*}
+where, $M_{i,j}$ represents the minor matrix formed by eliminating row $i$ and column $j$ from matrix $A$.
+The pseudo-code for the implementation of the cofactor expansion method has been shown in algo.~\ref{algo:Cofactor}.
+\input{Algo_1.tex}
+
+\begin{order}
+  The order of complexity of determinant computation using cofactor expansion is $\mathcal{O}(N!)$, where $N$ is the dimension of matrix.
+\end{order}
+\begin{proof}
+  The recurrence relation for the above algorithm can be written as $T(n) = n T(n-1) + (2n - 1)$. Using recursion, we can show the following
+  \begin{align*}
+    T(n) &= n (n-1) T(n-1) + n (n-1)\\
+         &= n(n-1)(n-2)T(n-3) + o(n^3)\\
+         & \vdots\\
+         &= C n! + o(n!)
+  \end{align*}
+  Therefore, the order of complexity of cofactor expansion is $\mathcal{O}(N!)$.
+\end{proof}
+
+\subsection*{(c) Computations}
+The cofactor expansion and LU factorisation algorithms discussed above were tested and compared for multiple matrix sizes and the obtained results are discussed hereon. As shown in fig.~\ref{fig:1}, the cofactor expansion method is quick for very small matrices but becomes very slow as the matrix increases. The LUP factorisation method on the other hand is extremely fast. In fact, LUP marginally outperforms cofactor expansion for a $4\times4$ matrix and observed to be slower than cofactor method only for $2\times2$ matrix where the cost of performing the LUP factorisation is significantly higher than the couple of FLOPS required for finding determinant by cofactor expansion. This behaviour is as expected from the order of complexity calculation shown above and the trend can be observed in fig.~\ref{fig:1} where the computation times of each method follow the orders of complexity trend shown by the dashed lines. Furthermore, the computation of determinant of large matrices using the cofactor method takes insanely long which is why the computations are performed only for matrix sizes of upto $12\times12$.
+  \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.75\textwidth]{figure/Figure_1.eps}
+        \caption{Wall times vs. matrix size for the Cofactor expansion and LUP factorisation methods.}
+        \label{fig:1}
+  \end{figure}
+
+For the purpose of analysis, the determinant values obtained through the two algorithms were compared with the results computed using \texttt{numpy} which uses the \texttt{LAPACK} subroutine \texttt{dgetrf}. Fig.~\ref{fig:2}
+\begin{figure}[h]
+      \centering
+      \includegraphics[width=0.75\textwidth]{figure/Figure_1.eps}
+      \caption{Absolute error (w.r.t. numpy)  vs. matrix size for the Cofactor expansion and LUP factorisation methods. The difference between the results from the two methods is also shown.}
+      \label{fig:2}
+\end{figure}
 \end{document}

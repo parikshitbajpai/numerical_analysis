@@ -72,7 +72,7 @@
   \end{remark}
   \begin{proof}
     Let $\|v\|_{\infty} = \max\limits_i |v_i|$ and $\|v\|_p = \left(\sum\limits_i |v_i|^p \right)^{\frac{1}{p}}$
-    \begin{align*}subsection name
+    \begin{align*}
       \|v\|_p &= \|v\|_{\infty} \frac{\left(\sum_i |v_i|^p\right)^{\frac{1}{p}}}{\|v\|_{\infty}} \\
               &= \|v\|_{\infty} \left(\sum_i\frac{|v_i|^p}{\|v\|_{\infty}^p}\right)^{\frac{1}{p}} \\
               &= \|v\|_{\infty} \left(\sum_i \left(\frac{|v_i|}{\|v\|_{\infty}}\right)^{p}\right)^{\frac{1}{p}} \\
@@ -85,7 +85,7 @@
     So, taking $p=1$ and $p=2$, we get
     \begin{align*}
       \|v\|_{\infty} \leq \|v\|_{1} \leq \|v\|_{\infty} n && (p=1)\\
-      \|v\|_{\infty} \leq \|v\|_{p} \leq \|v\|_{\infty} \sqrt{n} && (p=2)\\
+      \|v\|_{\infty} \leq \|v\|_{2} \leq \|v\|_{\infty} \sqrt{n} && (p=2)\\
     \end{align*}
     Therefore, from the above two inequalities,
     \begin{align*}
@@ -168,7 +168,7 @@ The pseudo-code for the implementation of the cofactor expansion method has been
   The order of complexity of determinant computation using cofactor expansion is $\mathcal{O}(N!)$, where $N$ is the dimension of matrix.
 \end{order}
 \begin{proof}
-  The recurrence relation for the above algorithm can be written as $T(n) = n T(n-1) + (2n - 1)$. Using recursion, we can show the following
+  The recurrence relation for the number of FLOPS in the cofactor algorithm can be written as $T(n) = n T(n-1) + (2n - 1)$. Using recursion, we can show the following
   \begin{align*}
     T(n) &= n (n-1) T(n-1) + n (n-1)\\
          &= n(n-1)(n-2)T(n-3) + o(n^3)\\

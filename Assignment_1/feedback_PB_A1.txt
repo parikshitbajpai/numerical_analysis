@@ -1,0 +1,10 @@
+Q1: The argument that (I+B)^{-1} and (I-B) are simultaneously diagonalizable needs a bit more work. Are you sure that every matrix (I+B) with B skew-symmetric is diagonalizable? It is more direct to multiply by (I+B) and then use that (I+B)(I-B)=I-B^2=(I-B)(I+B).
+Q2: Footnote 2 should just be written out as a sequence of inequalities. Only use footnotes when all else fails or when doing social sciences!
+Q3: In your explanation of the order of complexity of the cofactor expansion, the first right hand side is incorrect. Also, you can say more there, e.g. solve the recurrence relation without the second term and then argue that the result is  lower bound.
+In the third pseudo-code, the input is not triangular and the output is not the determinant.
+For alogrithm 2, you did not really need to write a pseudo-code for the construction of the minor matrix. In practice, this is done at the level of indexing rather than by copying matrix elements.
+
+Good code, easy to run.
+
+95/100
+

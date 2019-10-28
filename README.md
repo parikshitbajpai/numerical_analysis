@@ -4,6 +4,9 @@ This repository contains the codes, documents and assignments for **MCSC 6020G -
 
 Assignments submitted to _Prof. Lennaert van Veen_
 
+## Midterm Presentation
+The midterm presentation can be found in ```Midterm_Presentation```. The source files for building presentation are in the directory ```Midterm_Presentation/latex```
+
 ## Assignment 1
 *	All files part of this submission are in the directory ```Assignment_1```
 	*	```src``` contains all the python scripts.
@@ -18,3 +21,5 @@ Assignments submitted to _Prof. Lennaert van Veen_
 	*	To run only _Cofactor expansion_ execute ```make run-cofactor```
 	*	To run only _LUP factorisation_ execute ```make run-lu```
 	*	To clean up the python build files execute ```make clean```
+	
+

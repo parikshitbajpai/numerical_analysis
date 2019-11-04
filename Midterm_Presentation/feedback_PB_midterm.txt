@@ -1,0 +1,8 @@
+* Comments on the presentation:
+- Your slides are very good. I would say they are one round of fine-tuning away from the quality I expect to see at an international conference. Do try to avoid slides with only a few lines of text floating in the middle!
+- Do figure out in more details what exactly Affine Parametric Dependence is. This will surely be important because it specifies the way the solution depends on the parameters and, if I understand the objective correctly, you want to use a kind of Proper Orthogonal Functions to efficiently approximate solutions for a range of parameter values.
+- This is a very complicated multiphysics model, yet you explained it well enough for me to follow. You did probably lose you class mates along the way..
+- Please explain your "break even" measure.
+- I am convinced that you can keep working on this and present some results for the final project. However, be careful to keep the example computations comparatively simple and delimited. It will be more important to have something complete, tested and working, even if it is only a simple test case, than to have an unfinished project that aims to solve the full problem.
+
+90/100

@@ -43,8 +43,35 @@
 		i.e., $A^T$ is strictly row diagonally dominant.  
 		
 		Strictly row diagonally dominant matrix $A^T \in \mathbb{C}^{n \times n}$ can be decomposed into a diagonal matrix $D$ whose elements are $a^T_{ii}$ and matrix $B$ with diagonal elements equal to zero. It's non-singularity can then be shown as follows:
+		\begin{align}
+			|a_{j,j}| > \sum_{i=1, i\neq j}^n |a_{i,j}|\\
+			1 > \frac{1}{|a_{j,j}|} \sum_{i=1, i\neq j}^n |a_{i,j}|
+		\end{align}
+		The second inequality is equivalent to: 
+		\begin{align} \label{eq:contra1}
+			1 > \|D^{-1} B\|_{\infty}
+		\end{align}
+		
+		If $A^T$ was singular, $\exists x \neq 0$, such that $A^Tx=0$.
+		\begin{align}
+			A^Tx &= 0 \\
+			(D + B)x = 0\\
+			x = D^{-1} B x
+		\end{align}
+		
+		Using infinity norm:
+		\begin{equation}
+			\|x\|_{\infty}  =   \|D^{-1} B x \|_{\infty} \leq \|D^{-1} B\|_{\infty} \|x \|_{\infty}
+		\end{equation}
+		
+		Dividing by $\|x\|_{\infty}$
+		\begin{equation}
+			1 \leq   \|D^{-1} B \|_{\infty} 
+		\end{equation}
+		
+		This contradicts equation~\eqref{eq:contra1} and hence every strictly row diagonally dominant must be non singular.
 		 
-		Non-singularity of $A^T$ implies $det(A^T) \neq 0$. Since $det(A^T) = det(A)$, $det(A) \neq 0$, i.e., $A$ is non-singular. 	
+		Non-singularity of strictly row diagonally dominant $A^T$ implies $det(A^T) \neq 0$. Since $det(A^T) = det(A)$, $det(A) \neq 0$, i.e., $A$ is non-singular. 	
 	\end{proof}
 
 \section*{Question 2}

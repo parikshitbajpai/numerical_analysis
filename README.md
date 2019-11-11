@@ -4,6 +4,13 @@ This repository contains the codes, documents and assignments for **MCSC 6020G -
 
 Assignments submitted to _Prof. Lennaert van Veen_
 
+## Assignment 2
+*	All files part of this submission are in the directory ```Assignment_2```
+	*	```src``` contains all the python scripts.
+	*	```latex``` contains all the raw files and figures for the report.
+	*	The report is titled ```Assignment_2.pdf```
+* Run ```python run_newton.py``` to reproduce manufactured solution.
+
 ## Midterm Presentation
 The midterm presentation can be found in ```Midterm_Presentation```. The source files for building presentation are in the directory ```Midterm_Presentation/latex```
 

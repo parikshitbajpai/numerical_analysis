@@ -1,5 +1,6 @@
 import numpy as np
 from copy import copy
+from Functions import Function
 
 def Test_Step(x_n,direction_vector,residual,Lambda,N_Function):
     x_test = copy(x_n)

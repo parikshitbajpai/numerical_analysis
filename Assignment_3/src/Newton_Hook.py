@@ -4,8 +4,9 @@ from copy import copy
 from Functions import Function
 from Functions import Jacobian
 from Optimise import Optimise_direction_vector
+from Test_Step import Test_Step
 
-def Newton_Hook(trust_region,trust_region_min,n_iteration_max,x_0,Lambda,N_Function,alpha,beta):
+def Newton_Hook(trust_region,trust_region_min,n_iteration_max,x_0,Lambda,N_Function,alpha,beta,tolerance_function,tolerance_variable):
     n_iteration = 0
     x_n = copy(x_0)
     function = np.zeros((N_Function,1))

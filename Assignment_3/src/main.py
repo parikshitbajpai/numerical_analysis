@@ -8,5 +8,6 @@ Lambda = 1.05
 N_Function = 10
 x_0 = np.zeros(N_Function)
 alpha = 0.5                 # Reduction factor for trust region
+beta = 1.2                  # Increment factor for trust region
 
-Newton_Hook(trust_region_min,n_iteration_max,x_0,Lambda,N_Function,alpha)
+Newton_Hook(trust_region,trust_region_min,n_iteration_max,x_0,Lambda,N_Function,alpha,beta)

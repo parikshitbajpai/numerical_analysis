@@ -49,9 +49,9 @@
       &l_{ii} = \left(t_{ii} - \sum_{k=1}^{i-1} l_{ik}^2 \right)^{1/2}
     \end{align}
 
-    This results in the following banded matrix:
+    This results in a banded matrix with the following elements:
     \begin{equation}\label{Generic_LN}
-      \{l_{ij}\}_{\forall ij} = \begin{cases}
+      l_{ij} = \begin{cases}
             \sqrt{1+\dfrac{1}{i}} & i=j\\
             \left(\dfrac{1}{i}-1\right)\sqrt{1+\dfrac{1}{i-1}} & j=i-1\\
             0 & Otherwise
@@ -132,14 +132,66 @@ Eqn.~\eqref{eq:rootfunc} has a trivial solution $x = 1$ for $\lambda = 0$. This 
 \end{figure}
 
 The rate of convergence was tested for a range of number of equations with the same parameter values as for the trivial case. and the results are shown  in fig.~\ref{fig:conv}. As the number of equations increases, the 2 norm of the residuals increases (since it's proportional of $\sqrt{N}$), which explains the plateau as the number of equations increases. The plateau denotes the iterations which a used for arriving at a close enough approximation and beyong that the convergence is quadratic.
-\begin{figure}
+\begin{figure}[h!]
   \centering
-  \includegraphics{figures/convergence.pdf}
+  \includegraphics[width=0.75\textwidth]{figures/convergence.pdf}
   \caption{Convergence rate for the Newton-Hook method.}
-  \label{}
+  \label{fig:conv}
 \end{figure}
 
+For the other convergence tests, the parameters shown in tab.~\ref{tab:parameters} were used:
+\begin{table}[h!]
+\centering
+\caption{Parameters used in Newton-Hook and Newton-like methods.}
+\begin{tabular}{cccccc}
+\toprule
+{$\boldsymbol{\lambda}$} & {$\boldsymbol{\alpha}$} & {$\boldsymbol{\beta}$} & \textbf{Initial trust-region}  & \textbf{Initial estimate of solution} & \textbf{Number of equations}\\
+\midrule
+1  & 0.5  & 2.0 & 0.5 & Uniformly distributed random array & 25 \\
+\bottomrule
+\end{tabular}
+\label{tab:parameters}
+\end{table}
 
+The parameter $\lambda$ affects the order of convergence of the Newton-Hook method. The number of iterations required becomes lower as $\lambda$ approaches 0. Moreover, the trust region needs to be smaller as $\lambda$ becomes larger and larger. This can lead to convergence issues as the number of equations becomes large. In the tests, Newton-Hook converged consistently for number of equations up to 25 but for larger systems, Newton-Hook failed to converge as the value of parameter $\lambda$ was changed from zero to one. The results for different values of lambda are shown in fig.~\ref{fig:lambda}
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.75\textwidth]{figures/lambda.pdf}
+  \caption{Convergence rate for different values of parameter $\lambda$.}
+  \label{fig:lambda}
+\end{figure}
 
+The initial trust region also plays an important role in the number of iterations required for convergence. A very small initial estimate slows the progress of the code since larger Newton steps might still lead to a lower residual while a very large initial trust region can lead to increase in residuals for full Newton steps. Four different initial sizes were tested and the results have been shown in fig.~\ref{fig:trust_region}. As expected, for a very large trust region, the number of iterations spent in getting close to the true solution is large. The effect of an extremely small trust region was not observed as the smallest trust region was sufficiently large.
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.75\textwidth]{figures/trust_region.pdf}
+  \caption{Convergence rate for different sizes of initial trust region.}
+  \label{fig:lambda}
+\end{figure}
+
+Finally, the initial guess plays a very important role in achieving convergence. The initial estimates were selected to be either equal to 1 which is the solution for trivial case or were randomnly selected from a uniform random distribution in [1,1.5]. Since the solution goes away from 1 as parameter $\lambda$ goes away from 0, selecting 1 as an initial estimate was only useful for the cases with $\lambda$ close to 0. In other cases, the uniform random distribution provided faster convergence. However, the uniform distribution is not guaranteed to provide an estimate which can ensure convergence and therefore, during testing, the method failed to converged a number of times when the random sampling was used. However, the probability of convergence with random was still more than that with 1 as the initial guess. The results are shown in fig.~\ref{fig:initest}
+\begin{figure}[h!]
+  \centering
+  \begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=1\linewidth]{figures/initial_x1.pdf}
+    \caption{1 equation}
+    \label{fig:initest_1}
+  \end{subfigure}%
+  \begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=1\linewidth]{figures/initial_x2.pdf}
+    \caption{10 equations}
+    \label{fig:initest_2}
+  \end{subfigure}
+  \caption{Convergence rate for different initial estimates.}
+  \label{fig:initest}
+\end{figure}
+
+In summary, selecting the optimal value of a number of parameters used in the implementation can significantly affect the rate of convergence of Newton-Hook method. The initial estimate of the solution is the most significant parameter and appropriate selection can ensure convergence. The initial trust region size and scaling parameters for the trust region can also affect the performance of the method and must be carefully studied.
+
+\textbf{Collaboration:} This assignment was completed in collaboration with Marcos Machado. Discussions with other classmates were also quite useful in handling some of the issues.
+
+  \bibliographystyle{ieeetr}
   \bibliography{references}
 \end{document}

@@ -14,8 +14,8 @@ Assignments submitted to _Prof. Lennaert van Veen_
 1. Clone this repository using ```git clone git@github.com:parikshitbajpai/numerical_analysis.git``` or if already cloned pull changes using ```git pull```
 2. On terminal, navigate to the cloned directory - ```numerical_analysis/```
 3. Select one of the options to execute
-	*	To run with randomnly selected intial estimate of roots ```make run-random```. Note that this method may or may not converge and might have to be run multiple times to get results.
-	*	To run with intial estimate of roots equal to one ```make run-ones```. Note that this method may only converge for $\lambda$ close to 0.
+	*	To run with randomnly selected initial estimate of roots ```make run-random```. Note that this method may or may not converge and might have to be run multiple times to get results.
+	*	To run with initial estimate of roots equal to one ```make run-ones```. Note that this method may only converge for $\lambda$ close to 0.
 
 ## Assignment 2
 *	All files part of this submission are in the directory ```Assignment_2/```

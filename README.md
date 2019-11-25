@@ -16,6 +16,7 @@ Assignments submitted to _Prof. Lennaert van Veen_
 3. Select one of the options to execute
 	*	To run with randomnly selected initial estimate of roots ```make run-random```. Note that this method may or may not converge and might have to be run multiple times to get results.
 	*	To run with initial estimate of roots equal to one ```make run-ones```. Note that this method may only converge for $\lambda$ close to 0.
+	*	To clean up the python build files execute ```make clean```
 
 ## Assignment 2
 *	All files part of this submission are in the directory ```Assignment_2/```

@@ -7,7 +7,7 @@ import numpy as np
 from Newton_Hook import Newton_Hook
 
 Lambda = 1.0                    # Parameter $\lambda$ used in function
-N_Function = 10                 # Number of equations in the system
+N_Function = 100                # Number of equations in the system
 
 x_0 = 1.25 * np.ones((N_Function,1))    # Initial estimate
 

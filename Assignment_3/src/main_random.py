@@ -7,7 +7,7 @@ import numpy as np
 from Newton_Hook import Newton_Hook
 
 Lambda = 1.0                    # Parameter $\lambda$ used in function
-N_Function = 100                # Number of equations in the system
+N_Function = 25                 # Number of equations in the system
 
 x_0 = np.random.uniform(1,1.5,(N_Function,1))   # Initial estimate
 

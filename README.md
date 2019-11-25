@@ -11,7 +11,7 @@ Assignments submitted to _Prof. Lennaert van Veen_
 	*	The report is titled ```Assignment_3.pdf```
 
 **Instructions to run Assignment 3**
-1. Clone this repository using ```git clone git@github.com:parikshitbajpai/numerical_analysis.git```
+1. Clone this repository using ```git clone git@github.com:parikshitbajpai/numerical_analysis.git``` or if already cloned pull changes using ```git pull```
 2. On terminal, navigate to the cloned directory - ```numerical_analysis/```
 3. Select one of the options to execute
 	*	To run with randomnly selected intial estimate of roots ```make run-random```. Note that this method may or may not converge and might have to be run multiple times to get results.

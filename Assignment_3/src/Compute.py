@@ -1,5 +1,9 @@
+## Numerical Analysis Assignment 3
+## Date: 24 November 2019
+## This file computes parameters A and B used in the rational Newton method
+## Authors: Parikshit Bajpai, Marcos Machado
+
 import numpy as np
-from copy import copy
 
 def Compute_A(Lagrange_multiplier_n,N_Function,a,b):
     A = 0.0

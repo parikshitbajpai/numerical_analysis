@@ -1,0 +1,5 @@
+Good work again, and sorry for the delay. 90/100.
+
+Q1 seems almost complete, I just am a bit puzzled by the remark that "The second inequality is equivalent to" between (4) and (5). It may be true, but some work will go into showing that if I am not missing something.
+Q3: Good job. My only question concerns the remark that "it did fail
+to converge numerous times. However, even when it failed to converge, the residuals and errors were still less than the linear approximation." Did you stop at a fixed number of iterations? If not, failure to converge would mean the residual becomes unreasonably large or does not approach zero even for many (thousands) of iterations. Saying that the final residual was still better than that for regular Newton suggests a fixed, small number of iterations..

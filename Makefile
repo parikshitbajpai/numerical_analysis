@@ -1,7 +1,15 @@
 RUN_A3_PATH=./Assignment_3/src/
-REPORT_A1_PATH=./Assignment_3/latex/
+REPORT_A3_PATH=./Assignment_3/latex/
 RUN_A1_PATH=./Assignment_1/src/
 REPORT_A1_PATH=./Assignment_1/latex/
+PROJECT_T1_PATH=./project/thermal_block/
+PROJECT_T2_PATH=./project/navier_stokes/
+
+run-thermal_block:
+	python3 $(PROJECT_T1_PATH)thermal_block.py
+
+run-navier_stokes:
+	python3 $(PROJECT_T2_PATH)navier_stokes_exact_1.py
 
 run-random:
 	python $(RUN_A3_PATH)main_random.py

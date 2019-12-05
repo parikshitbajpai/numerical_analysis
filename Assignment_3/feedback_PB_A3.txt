@@ -1,0 +1,9 @@
+Good work. A pity you missed part of 1b. 88/100.
+
+Q1.
+a. So you found a general expression for the Cholesky decomposition. Cool, I did not know it existed.
+b. You confuse the index of the vector ($k$ in Eq. 10) with the index of the eigenvector. Each eigenvector has a different value of $\alpha$. you find it by re-writing Eqs. 9-11 in the form "(something that depends only on $\alpha$ and $N$) times S". This gives you an equation for $\alpha$ with exactly $N$ solutions.
+
+Q2.
+* "... to reduce the computational effort for arriving close enough to the true solution ..." It is not so clear from the example we used, but usually Newton-Raphson steps will lead to divergence (NaNs and Infs). Newton-hook (and other "Newton-like" methods) often take a great many iterations to get close to the true solution - but they often get there in the end. It is thus more accurate to say that "Newton-hook is a method to find a solution, even if at great computational cost, where regular Newton-Raphson iteration fails."
+* "for a very large trust region, the number of iterations spent in getting close to the true solution is large" Why? I would guess that if the trust region is too large, it will be reduced by a factor of $\alpha$ in each iteration and quickly be reduced to a good size. Or maybe the large step was actually accepted but gave a worse approximation of the solution (that would be interesting). I see, however, that the result of your test (in Fig. 5) is not monotonic - the number of steps is smaller for initial trust region size 1 than for 0.5. Maybe you used random initial guesses here? In that case, you should run many tests and present the average.

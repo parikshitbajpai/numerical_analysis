@@ -4,6 +4,23 @@ This repository contains the codes, documents and assignments for **MCSC 6020G -
 
 Assignments submitted to _Prof. Lennaert van Veen_
 
+## Project - Reduced Basis Method for Toy Problems
+The reduced basis models of the project use [RBniCS](http://mathlab.sissa.it/rbnics) library which implements several reduced order modelling techniques in finite element framework [FEniCS](https://fenicsproject.org/).
+
+**Prequisites**
+1. FEniCS (>= 2018.1.0, python 3), with PETSc, SLEPc, petsc4py and slepc4py for computations during the offline stage. Download and build instructions are available at [FEniCS Download](https://fenicsproject.org/download/).
+2. numpy and scipy for computations suring the online stage.
+3. To install RBniCS:
+	* Clone from the public repository using ```git clone https://gitlab.com/RBniCS/RBniCS.git```
+	* Install the package using ```python3 setup.py install```
+
+**Instructions to run the project**
+1. Clone this repository using ```git clone git@github.com:parikshitbajpai/numerical_analysis.git``` or if already cloned pull changes using ```git pull```
+2. On terminal, navigate to the cloned directory - ```numerical_analysis/```
+3. Select one of the options to execute
+	*	To run the thermal block case, ```make run-thermal_block```
+	*	To run the Navier Stokes backward facing step case, ```make run-navier_stokes```
+
 ## Assignment 3
 *	All files part of this submission are in the directory ```Assignment_3/```
 	*	```src/``` contains all the python scripts.

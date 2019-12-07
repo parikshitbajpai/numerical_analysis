@@ -1,40 +1,51 @@
-from ufl import transpose
+# This file performs a Reduced Basis simulation for a backward facing step
+# described in the project presentation.
+# The file has been adopted and modified from RBnics tutorials available
+# at <https://gitlab.com/RBniCS/RBniCS>.
+
 from dolfin import *
 from rbnics import *
 
 @ExactParametrizedFunctions()
 class NavierStokes(NavierStokesProblem):
-    
+
     # Default initialization of members
     def __init__(self, V, **kwargs):
         # Call the standard initialization
         NavierStokesProblem.__init__(self, V, **kwargs)
-        # ... and also store FEniCS data structures for assembly
+
+        # Store FEniCS data structures for assembly
         assert "subdomains" in kwargs
         assert "boundaries" in kwargs
         self.subdomains, self.boundaries = kwargs["subdomains"], kwargs["boundaries"]
+
+        # FE Trial Function
         dup = TrialFunction(V)
         (self.du, self.dp) = split(dup)
         (self.u, _) = split(self._solution)
+
+        # FE Test Function
         vq = TestFunction(V)
         (self.v, self.q) = split(vq)
         self.dx = Measure("dx")(subdomain_data=self.subdomains)
         self.ds = Measure("ds")(subdomain_data=self.boundaries)
-        # ... as well as forcing terms and inlet velocity
+
+        # Forcing terms and inlet velocity
         self.inlet = Expression(("1./2.25*(x[1] - 2)*(5 - x[1])", "0."), degree=2)
         self.f = Constant((0.0, 0.0))
         self.g = Constant(0.0)
+
         # Customize nonlinear solver parameters
         self._nonlinear_solver_parameters.update({
             "linear_solver": "mumps",
             "maximum_iterations": 20,
             "report": True
         })
-        
+
     # Return custom problem name
     def name(self):
         return "NavierStokesExact1"
-        
+
     # Return theta multiplicative terms of the affine expansion of the problem.
     @compute_theta_for_derivatives
     @compute_theta_for_supremizers
@@ -60,7 +71,7 @@ class NavierStokes(NavierStokesProblem):
             return (theta_bc00,)
         else:
             raise ValueError("Invalid term for compute_theta().")
-                
+
     # Return forms resulting from the discretization of the affine expansion of the problem operators.
     @assemble_operator_for_derivatives
     @assemble_operator_for_supremizers
@@ -110,7 +121,7 @@ class NavierStokes(NavierStokesProblem):
             return (x0,)
         else:
             raise ValueError("Invalid term for assemble_operator().")
-        
+
 # Customize the resulting reduced problem
 @CustomizeReducedProblemFor(NavierStokesProblem)
 def CustomizeReducedNavierStokes(ReducedNavierStokes_Base):
@@ -121,7 +132,7 @@ def CustomizeReducedNavierStokes(ReducedNavierStokes_Base):
                 "report": True,
                 "line_search": "wolfe"
             })
-            
+
     return ReducedNavierStokes
 
 # 1. Read the mesh for this problem
@@ -142,7 +153,7 @@ navier_stokes_problem.set_mu_range(mu_range)
 
 # 4. Prepare reduction with a POD-Galerkin method
 pod_galerkin_method = PODGalerkin(navier_stokes_problem)
-pod_galerkin_method.set_Nmax(10)
+pod_galerkin_method.set_Nmax(10)                # Max number of basis functions.
 
 # 5. Perform the offline phase
 lifting_mu = (1.0,)

@@ -6,6 +6,15 @@ Assignments submitted to _Prof. Lennaert van Veen_
 
 ## Project - Reduced Basis Method for Toy Problems
 The reduced basis models of the project use [RBniCS](http://mathlab.sissa.it/rbnics) library which implements several reduced order modelling techniques in finite element framework [FEniCS](https://fenicsproject.org/).
+*	All files part of this submission are in the directory ```Project/```
+	*	```thermal_block/``` contains all the required data and code for the heat conduction problem.
+	* ```navier_stokes/``` contains all the required data and code for the fluid flow problem.
+	*	```latex/``` contains all the raw files and figures for the report.
+	*	The report is titled ```Project_Report.pdf```
+	*	```presentation/``` contains all the raw files and figures for the presentation.
+	*	The presentation is titled ```Project_Report.pdf```
+
+* _Note:_ Upon running, the computational results for each problem get saved in new subdirectories created within ```thermal_block/``` and  ```navier_stokes/```. [ParaView](https://www.paraview.org/) was used to post-process the results from finite element and RB methods. The error and speedup plots were generated using ```Pyplot``` from the ```*.csv``` files generated during the error and speedup analyses.    
 
 **Prequisites**
 1. FEniCS (>= 2018.1.0, python 3), with PETSc, SLEPc, petsc4py and slepc4py for computations during the offline stage. Download and build instructions are available at [FEniCS Download](https://fenicsproject.org/download/).

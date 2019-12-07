@@ -8,3 +8,4 @@
 *.bbl
 *.blg
 ThermalBlock/
+.DS_Store

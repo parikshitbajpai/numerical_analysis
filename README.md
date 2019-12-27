@@ -30,6 +30,9 @@ The reduced basis models of the project use [RBniCS](http://mathlab.sissa.it/rbn
 	*	To run the thermal block case, ```make run-thermal_block```
 	*	To run the Navier Stokes backward facing step case, ```make run-navier_stokes```
 
+## Assignment 4
+*	All files part of this submission are in the directory ```Assignment_4/```
+
 ## Assignment 3
 *	All files part of this submission are in the directory ```Assignment_3/```
 	*	```src/``` contains all the python scripts.
